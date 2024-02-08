@@ -1,0 +1,30 @@
+---
+import SigninoutLayout from "@/layouts/SigninoutLayout.astro";
+import AuthForm from '@/components/AuthForm.astro'
+import AuthFormSvelte from '@/components/AuthFormSvelte.svelte'
+import AuthFormOAuth from '@/components/AuthFormOAuth.astro'
+
+type Locals = {
+  path: string;
+}
+const apiPath: Locals = Astro.locals.path
+---
+
+<SigninoutLayout title="Sign in">
+  <div class="formwrap">
+    <AuthForm title="Astro Sign in">
+      <p>初めてですか? <a href="/register">アカウントを作成してください</a></p>
+    </AuthForm>
+    <AuthFormSvelte title="Svelte Sign in" path={apiPath} client:load >
+      <p>初めてですか? <a href="/register">アカウントを作成してください</a></p>
+    </AuthFormSvelte>
+    <AuthFormOAuth />
+  </div>
+</SigninoutLayout>
+
+<style>
+.formwrap{
+  display:flex;
+  height: calc(100lvh - 104px);
+}
+</style>
